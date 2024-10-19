@@ -1,0 +1,94 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[12pt]{extsizes}
+\usepackage[utf8]{inputenc}
+\usepackage[russianb]{babel}
+\usepackage[left=1.0cm,right=1.0cm,top=0.5cm,bottom=0.5cm]{geometry}
+\usepackage{setspace}
+\usepackage{indentfirst}
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage[pdftex]{graphicx}
+\usepackage{comment}
+
+
+\usepackage{hyperref}
+
+\usepackage{titling}  
+\usepackage{geometry} 
+\usepackage{fancyhdr}
+
+
+\setlength{\headheight}{15mm}
+
+
+\pagestyle{fancy}
+
+\lhead{\textbf{\normalsize Проект 1}}
+\rhead{\textbf{\normalsize Выполнили: }\normalsize Кирякин Максим, Куренкова Дарья, Коваль Наталья}
+
+
+
+\begin{document}
+	
+
+\section{Постановка задачи}
+
+В работе было необходимо построить прогноз значений временного ряда с помощью моделей эконометрики. 
+
+Модель ARIMA (Autoregressive Integrated Moving Average) используется для прогнозирования временных рядов.
+Формула модели ARIMA(p, d, q):
+$$
+\Delta^d y_t = \alpha_1 \Delta^d y_{t-1} + ... + \alpha_p\Delta^dy_{t-p} + \varepsilon_t + \beta_1\varepsilon_{t-1} + ... + \beta_q\varepsilon_{t-q},
+$$
+
+$y_t$ - значение временного ряда в момент времени $t$, $\Delta = (1 - L)^d$, $\varepsilon_t$ - белый шум. L - лаговый оператор.
+
+Модель SARIMA – расширение для рядов с сезонной составляющей. SARIMAX – расширение, включающее внешнюю регрессионную составляющую
+
+
+\section{Ход работы}
+В работе решалась задача прогнозирования числа продаж в сети магазинов Эквадора. Было рассмотрено 3 способа прогнозирования:
+\begin{itemize}
+	\item ARIMA модель с ручной настройкой параметров p, d и q
+	\item SARIMAX модель
+	\item Модель машинного обучения (градиентный бустинг)
+\end{itemize}
+
+
+Качество оценивалось с помощью следующих метрик: MSE, RMSE, MAE, абсолютная процентная ошибка. 
+Результаты сравнивались с наивным прогнозом -- средним числом продаж за последнюю четверть тренировочного периода. Выбор параметров для ARIMA модели осуществлялся на основе значений функций автокорреляции и частичной автокорреляции. Стационарность ряда проверялась с помощью теста  Дики — Фуллера.
+
+Кроме этого, в работе была обучена ml-модель градиентного бустинга. Для нее был использован перебор гиперпараметров пакета hyperopt, в основе которого лежит байесовская оптимизация. Результаты бустинга сравнивались с результатами экономических моделей и наивного прогноза. 
+
+Все графики и данные доступны на странице  
+\href{https://github.com/MaximKiryakin/Vega/tree/main/%D0%A4%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D1%8D%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D0%BA%D0%B0/%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%201}{проекта}.
+
+\section{Заключение}
+
+ Были получены следующие значения метрик:
+
+
+\begin{table}[h]
+	\centering
+	\caption{Преимущества и недостатки недифференцированного маркетинга}
+	\begin{tabularx}{\textwidth}{|X|X|X|X|X|}
+		\hline
+		Метрика & ARIMA & SARIMAX & XGBRegressor & Наивный прогноз \\
+		\hline
+		MSE & 370425.063612 & 11849.563053 & 2761.131836 & 20720.685499 \\
+		RMSE & 608.625553 & 108.855698 & 52.546473 & 143.946815 \\
+		MAE & 600.125711 & 70.474641 & 42.322258 & 114.795845 \\
+		Процентная ошибка & 1.133873 & 0.117918 & 0.080065 & 0.196057 \\
+		\hline
+	\end{tabularx}
+\end{table}
+
+
+
+По метрикам RMSE, MAE и процентной ошибке лучше всего себя показала ML модель. Второй по качеству оказалась SARIMAX модель. Полученные результаты можно объяснить тем, что ML модель имеет другую архитектуру (более сложный и тонкий процесс обучения), является более совершенной и новой, по сравнению с эконометрической моделью.
+	
+	
+\end{document}
