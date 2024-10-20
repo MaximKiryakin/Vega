@@ -2,7 +2,12 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # функции автокорреляционной ф-ии и частичной автокорреляционной ф-ии
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-from sklearn.metrics import mean_squared_error, mean_absolute_error, mean_absolute_percentage_error
+from sklearn.metrics import (
+    mean_squared_error,
+    mean_absolute_error,
+    mean_absolute_percentage_error,
+    root_mean_squared_error
+)
 
 def plotTimeSeries(data: pd.DataFrame, X:str, y:str, axs=None, xlabel:str ="",
                    ylabel:str ="", title:str="", savePath="", **kwargs):
@@ -41,7 +46,7 @@ def plotAcfPacf(data: pd.DataFrame, y: str, savePath: str = ""):
 
 def errorsCheck(y_true, y_pred):
     mse = mean_squared_error(y_true, y_pred)
-    rmse = mean_squared_error(y_true, y_pred, squared=False)
+    rmse = root_mean_squared_error(y_true, y_pred)
     mae = mean_absolute_error(y_true, y_pred)
     mape = mean_absolute_percentage_error(y_true, y_pred)
     
