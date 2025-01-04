@@ -12,9 +12,11 @@
 
 $\textbf{ARIMA(p, d, q)}$ модель:
 
+$$
 \begin{align*}
 	\Delta^d y_t = \alpha_1 \Delta^d y_{t-1} + ... + \alpha_p\Delta^dy_{t-p} + \varepsilon_t + \beta_1\varepsilon_{t-1} + ... + \beta_q\varepsilon_{t-q},
 \end{align*}
+$$
 
 Обобщение модели ARIMA на ряды с наличием сезонной составляющей назвается SARIMA. Пусть s — известная сезонность ряда. Добавим в модель ARIMA(p,d,q) компоненты, отвечающие за значения в предыдущие сезоны.
 
