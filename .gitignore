@@ -1,0 +1,21 @@
+# Ignore log files
+blockchain.log
+HW2/blockchain.log
+
+# Ignore secret token file
+token.txt
+
+# Python virtual environment
+env/
+HW2/env/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db

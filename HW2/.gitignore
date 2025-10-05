@@ -1,0 +1,12 @@
+# Ignore log
+blockchain.log
+
+# Local virtual environment
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
